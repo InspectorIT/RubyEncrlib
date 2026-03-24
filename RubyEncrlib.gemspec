@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "RubyEncrlib"
-  s.version     = "0.0.2"
+  s.version     = "0.0.3"
   s.summary     = "string encryption gem"
   s.description = "Simple gem with some simple methods to encrypt a message in russian or english"
   s.authors     = []

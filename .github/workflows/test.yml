@@ -14,4 +14,4 @@ jobs:
           bundler-cache: true
 
       - name: Run Rake
-        run: ruby Rakefile
+        run: exec Rakefile

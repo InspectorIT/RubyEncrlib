@@ -1,5 +1,8 @@
 # frozen_string_literal: true
-
+# string encryption with Caesar cipher|Шифрование строки методом Цезаря
+# @param str [String] input string|исходная строка
+# @param key [Integer] amount to move|сдвиг
+# @return [String] encrypted string|зашифрованная строка
 def caesar_cipher(str, key)
   encstr = ''
   str.chars.each do |x|
@@ -20,14 +23,17 @@ def caesar_cipher(str, key)
   end
   encstr
 end
-
+# string decryption with Caesar cipher|Расшифровка строки методом Цезаря
+# @param str [String] encrypted string|зашифрованная строка
+# @param key [Integer] amount to move|сдвиг
+# @return [String] decrypted string|исходная строка
 def caesar_decipher(str, key)
   encstr = ''
   str.chars.each do |x|
     y = if x.ord in 1072..1103
-          (((x.ord - 1072 - key) % 33) + 1072).chr(Encoding::UTF_8)
+          (((x.ord - 1072 - key) % 32) + 1072).chr(Encoding::UTF_8)
         elsif x.ord in 1040..1071
-          (((x.ord - 1040 - key) % 33) + 1040).chr(Encoding::UTF_8)
+          (((x.ord - 1040 - key) % 32) + 1040).chr(Encoding::UTF_8)
         elsif x.ord in 65..90
           (((x.ord - 65 - key) % 26) + 65).chr(Encoding::UTF_8)
         elsif x.ord in 97..122
@@ -41,7 +47,10 @@ def caesar_decipher(str, key)
   end
   encstr
 end
-
+# string encryption with Viginere cipher/Шифрование строки методом Виженера
+# @param str [String] input string|исходная строка
+# @param key [String] key word|ключевое слово
+# @return [String] encrypted string|зашифрованная строка
 def viginere_cipher(str, key)
   encstr = ''
   key += key while key.size < str.size
@@ -63,7 +72,10 @@ def viginere_cipher(str, key)
   end
   encstr
 end
-
+# string decryption with Viginere cipher|Расшифровка строки методом Виженера
+# @param str [String] encrypted string|зашифрованная строка
+# @param key [String] key word|ключевое слово
+# @return [String] decrypted string|исходная строка
 def viginere_decipher(str, key)
   encstr = ''
   key += key while key.size < str.size
@@ -85,7 +97,10 @@ def viginere_decipher(str, key)
   end
   encstr
 end
-
+# string encryption with Playfair cipher/Шифрование строки методом Плейфера
+# @param str [String] input string|исходная строка
+# @param key [Array<Array<String>>] square matrix as key|ключ в виде квадратной матрицы
+# @return [String] encrypted string|зашифрованная строка
 def playfair_cipher(str, key)
   ind = 0
   encstr = ''
@@ -139,7 +154,10 @@ def playfair_cipher(str, key)
   end
   encstr
 end
-
+# string decryption with Playfair cipher|Расшифровка строки методом Плейфера
+# @param str [String] encrypted string|зашифрованная строка
+# @param key [Array<Array<String>>] square matrix as key|ключ в виде квадратной матрицы
+# @return [String] decrypted string|исходная строка
 def playfair_decipher(str, key)
   ind = 0
   encstr = ''

@@ -116,7 +116,7 @@ def viginere_cipher(str, key)
                     else
                       0
                     end
-            ((str[x].ord - 65 + idx_key) % 26 + 65).chr(Encoding::UTF_8)
+          ((str[x].ord - 65 + idx_key) % 26 + 65).chr(Encoding::UTF_8)
         elsif str[x].ord in 97..122
           idx_key = if lower_eng.include?(key[x])
                       lower_eng.index(key[x])
@@ -198,7 +198,7 @@ def viginere_decipher(str, key)
                     else
                       0
                     end
-            ((str[x].ord - 65 - idx_key) % 26 + 65).chr(Encoding::UTF_8)
+          ((str[x].ord - 65 - idx_key) % 26 + 65).chr(Encoding::UTF_8)
         elsif str[x].ord in 97..122
           idx_key = if lower_eng.include?(key[x])
                       lower_eng.index(key[x])
@@ -218,7 +218,7 @@ def viginere_decipher(str, key)
                     else
                       0
                     end
-            ((str[x].ord - 48 - idx_key) % 10 + 48).chr(Encoding::UTF_8)
+          ((str[x].ord - 48 - idx_key) % 10 + 48).chr(Encoding::UTF_8)
         else
           str[x]
         end
@@ -226,6 +226,7 @@ def viginere_decipher(str, key)
   end
   decstr
 end
+
 # string encryption with Playfair cipher/Шифрование строки методом Плейфера
 # @param str [String] input string|исходная строка
 # @param key [Array<Array<String>>] square matrix as key|ключ в виде квадратной матрицы
@@ -261,7 +262,7 @@ def playfair_cipher(str, key)
     else
       encstr += if x1 != x2 && y1 != y2
                    key[x1][y2] + key[x2][y1]
-                 elsif x1 != x2 && y1 == y2
+                elsif x1 != x2 && y1 == y2
                    if x1 + 1 > key.size - 1
                      x1 = -1
                    end
@@ -269,7 +270,7 @@ def playfair_cipher(str, key)
                      x2 = -1
                    end
                    key[x1 + 1][y1] + key[x2 + 1][y2]
-                 else
+                else
                    if y1 + 1 > key[x1].size - 1
                      y1 = -1
                    end
@@ -309,25 +310,25 @@ def playfair_decipher(str, key)
         end
       end
     end
-       encstr +=  if x1 != x2 && y1 != y2
-      key[x1][y2] + key[x2][y1]
-              elsif x1 != x2 && y1 == y2
-                 if x1 == 0
-                   x1 = 5
-                 end
-                if x2 == 0
-                  x2 = 5
-                end
-                key[x1 - 1][y1] + key[x2 - 1][y2]
-              else
-                 if y1 == 0
-                   y1 = 5
-                 end
-                 if y2 == 0
-                   y2 = 5
-                 end
-                key[x1][y1 - 1] + key[x2][y2 - 1]
-                  end
+    encstr +=  if x1 != x2 && y1 != y2
+   key[x1][y2] + key[x2][y1]
+               elsif x1 != x2 && y1 == y2
+              if x1 == 0
+                x1 = 5
+              end
+              if x2 == 0
+                x2 = 5
+              end
+              key[x1 - 1][y1] + key[x2 - 1][y2]
+               else
+              if y1 == 0
+                y1 = 5
+              end
+              if y2 == 0
+                y2 = 5
+              end
+              key[x1][y1 - 1] + key[x2][y2 - 1]
+               end
     ind += 2
   end
   if encstr[-1] == 'X'
@@ -340,5 +341,5 @@ def playfair_decipher(str, key)
     end
     x+=1
   end
-    encstr
+  encstr
 end

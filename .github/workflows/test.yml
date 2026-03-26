@@ -14,4 +14,4 @@ jobs:
           bundler-cache: true
 
       - name: Run Rake
-        run: bundle exec rake # Запустит задачу :default из вашего Rakefile
+        run: Rakefile

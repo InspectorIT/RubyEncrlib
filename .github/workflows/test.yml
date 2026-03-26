@@ -1,0 +1,17 @@
+name: Ruby CI
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby 4.0
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
+          bundler-cache: true
+
+      - name: Run Rake
+        run: bundle exec rake # Запустит задачу :default из вашего Rakefile

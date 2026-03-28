@@ -31,7 +31,7 @@ class ViginereCipherTest < Minitest::Test
   end
 
   def test_vigenere_with_single_letter_key
-    assert_equal 'Бвг Деёж', viginere_cipher('Абв Гдеё', 'Б')
+    assert_equal 'Бвг Деёж', viginere_cipher('Абв Гдее', 'Б')
   end
 
   def test_vigenere_key_longer_than_text

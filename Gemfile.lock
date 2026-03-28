@@ -1,13 +1,22 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    minitest (6.0.0)
+      prism (~> 1.5)
+    prism (1.8.0)
 
 PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
+  minitest
 
 CHECKSUMS
+  minitest (6.0.0)
+  prism (1.8.0)
+
+RUBY VERSION
+  ruby 4.0.1
 
 BUNDLED WITH
   4.0.3

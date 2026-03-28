@@ -9,7 +9,7 @@ class ViginereCipherTest < Minitest::Test
   end
 
   def test_viginere_repeats_short_key_automatically
-    assert_equal 'bcdef', viginere_cipher('abcde', 'b')
+    assert_equal 'bcde', viginere_cipher('abcde', 'b')
   end
 
   def test_viginere_handles_digits

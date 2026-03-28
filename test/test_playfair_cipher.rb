@@ -4,7 +4,7 @@ require 'minitest/autorun'
 require_relative '../lib/encrlib'
 
 class PlayfairCipherTest < Minitest::Test
-  LETTER_MATRIX_ENGLISH_BIG = [
+  LETTER_MATRIX_ENGLISH_UPPER = [
     ['P', 'L', 'A', 'Y', 'F'],
     ['I', 'R', 'B', 'C', 'D'],
     ['E', 'G', 'H', 'K', 'M'],
@@ -12,7 +12,7 @@ class PlayfairCipherTest < Minitest::Test
     ['U', 'V', 'W', 'X', 'Z']
   ].freeze
 
-  LETTER_MATRIX_ENGLISH_SMALL = [
+  LETTER_MATRIX_ENGLISH_LOWER = [
     ['p', 'l', 'a', 'y', 'f'],
     ['i', 'r', 'b', 'c', 'd'],
     ['e', 'g', 'h', 'k', 'm'],
@@ -20,7 +20,7 @@ class PlayfairCipherTest < Minitest::Test
     ['u', 'v', 'w', 'x', 'z']
   ].freeze
 
-    LETTER_MATRIX_RUSSIAN_BIG = [
+    LETTER_MATRIX_RUSSIAN_UPPER = [
     ['А', 'Б', 'В', 'Г', 'Д'],
     ['Е', 'Ж', 'З', 'И', 'К'],
     ['Л', 'М', 'Н', 'О', 'П'],
@@ -28,7 +28,7 @@ class PlayfairCipherTest < Minitest::Test
     ['Х', 'Ц', 'Ч', 'Ш', 'Щ']
   ].freeze
 
-  LETTER_MATRIX_RUSSIAN_SMALL = [
+  LETTER_MATRIX_RUSSIAN_LOWER = [
     ['а', 'б', 'в', 'г', 'д'],
     ['е', 'ж', 'з', 'и', 'к'],
     ['л', 'м', 'н', 'о', 'п'],
@@ -43,33 +43,33 @@ class PlayfairCipherTest < Minitest::Test
     ['C', 'D', 'E', 'F']
   ].freeze
 
-  def test_playfair_encrypts_english_text_big
-    assert_equal 'KGAL', playfair_cipher('HELP', LETTER_MATRIX_ENGLISH_BIG)
+  def test_playfair_encrypts_english_text_upper
+    assert_equal 'KGAL', playfair_cipher('HELP', LETTER_MATRIX_ENGLISH_UPPER)
   end
 
-  def test_playfair_encrypts_english_text_small
-    assert_equal 'kgal', playfair_cipher('help', LETTER_MATRIX_ENGLISH_SMALL)
+  def test_playfair_encrypts_english_text_lower
+    assert_equal 'kgal', playfair_cipher('help', LETTER_MATRIX_ENGLISH_LOWER)
   end
 
-  def test_playfair_encrypts_russian_text_big
-    assert_equal 'ЛФЗГЗРОЖХА', playfair_cipher('ПРИВЕТМИР', LETTER_MATRIX_RUSSIAN_BIG)
+  def test_playfair_encrypts_russian_text_upper
+    assert_equal 'ЛФЗГЗРОЖХА', playfair_cipher('ПРИВЕТМИР', LETTER_MATRIX_RUSSIAN_UPPER)
   end
 
-  def test_playfair_encrypts_russian_text_small
-    assert_equal 'лфзгзрожха', playfair_cipher('приветмир', LETTER_MATRIX_RUSSIAN_SMALL)
+  def test_playfair_encrypts_russian_text_lower
+    assert_equal 'лфзгзрожха', playfair_cipher('приветмир', LETTER_MATRIX_RUSSIAN_LOWER)
   end
 
   def test_playfair_handles_odd_length
-    assert_equal 'VQGRCZ', playfair_cipher('WORLD', LETTER_MATRIX_ENGLISH_BIG)
+    assert_equal 'VQGRCZ', playfair_cipher('WORLD', LETTER_MATRIX_ENGLISH_UPPER)
   end
 
   def test_playfair_handles_double_letters
-    assert_equal 'HBYVRVQO', playfair_cipher('BALLOON', LETTER_MATRIX_ENGLISH_BIG)
+    assert_equal 'HBYVRVQO', playfair_cipher('BALLOON', LETTER_MATRIX_ENGLISH_UPPER)
   end
 
   def test_playfair_removes_spaces
-    assert_equal playfair_cipher('HELLOWORLD', LETTER_MATRIX_ENGLISH_BIG),
-                 playfair_cipher('HELLO WORLD', LETTER_MATRIX_ENGLISH_BIG)
+    assert_equal playfair_cipher('HELLOWORLD', LETTER_MATRIX_ENGLISH_UPPER),
+                 playfair_cipher('HELLO WORLD', LETTER_MATRIX_ENGLISH_UPPER)
   end
 
   def test_playfair_handles_digits

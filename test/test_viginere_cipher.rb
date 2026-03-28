@@ -25,4 +25,8 @@ class ViginereCipherTest < Minitest::Test
     assert_equal '.', encrypted[11]
     assert_equal '.', encrypted[13]
   end
+
+  def test_viginere_encrypts_russian_text
+    assert_equal 'ЪьжщпюКаы', viginere_cipher('ПриветМир', 'Ключ')
+  end
 end

@@ -1,4 +1,5 @@
-require 'rake/testtask'
+require "bundler/gem_tasks"
+require "minitest/test_task"
 task default: "test"
 Rake::TestTask.new do |task|
     task.pattern = 'test/test_caesar_cipher.rb'

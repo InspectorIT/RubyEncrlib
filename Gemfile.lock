@@ -1,0 +1,22 @@
+PATH
+  remote: .
+  specs:
+    RubyEncrlib (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (6.0.0)
+    rake (13.3.1)
+
+PLATFORMS
+  x64-mingw-ucrt
+  x86_64-linux
+
+DEPENDENCIES
+  RubyEncrlib!
+  minitest
+  rake
+
+BUNDLED WITH
+  4.0.3

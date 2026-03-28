@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.version     = "0.1.0"
   s.summary     = "string encryption gem"
   s.description = "Simple gem with some simple methods to encrypt a message in russian or english"
-  s.authors     = []
+  s.authors     = ["RusiSLin"]
   s.email       = "RusiSLin@gmail.com"
   s.files       = ["lib/encrlib.rb"]
   s.homepage    = "https://github.com/fect1/RubyEncrlib"

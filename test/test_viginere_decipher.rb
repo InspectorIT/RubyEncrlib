@@ -36,4 +36,22 @@ class ViginereCipherTest < Minitest::Test
 
     assert_equal 'Ёжик, беги!', viginere_decipher(encrypted, 'Ключ')
   end
+
+  def test_vigenere_round_trip
+    original = "Проверка связи 123!"
+    key = "Секрет"
+    encrypted = viginere_cipher(original, key)
+
+    assert_equal original, viginere_decipher(encrypted, key)
+  end
+
+  def test_vigenere_commutativity
+    text = "АЛГОРИТМ"
+    key = "МУЗЫКА"
+
+    result_1 = viginere_cipher(text, key)
+    result_2 = viginere_cipher(key, text)
+
+    assert_equal result_1[0...key.length], result_2[0...key.length]
+  end
 end

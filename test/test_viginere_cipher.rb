@@ -37,4 +37,8 @@ class ViginereCipherTest < Minitest::Test
   def test_vigenere_key_longer_than_text
     assert_equal 'Юзнпбц', viginere_cipher('Привет', 'ОченьДлинныйКлюч')
   end
+
+  def test_viginere_lat_cyr_alphabet_cipher
+    assert_equal 'ЬяньшSxhAzaq', viginere_cipher('СуперAndCool', 'КлючIsKey');
+  end
 end

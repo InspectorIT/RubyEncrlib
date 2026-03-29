@@ -54,4 +54,13 @@ class ViginereCipherTest < Minitest::Test
 
     assert_equal result_1[0...key.length], result_2[0...key.length]
   end
+
+  def test_viginere_lat_cyr_alphabet_decipher
+    source = 'ТекстTextdifFerents 987'
+    key = 'КлючCluch'
+
+    encrypted = viginere_cipher(source, key)
+
+    assert_equal source, viginere_decipher(encrypted, key)
+  end
 end

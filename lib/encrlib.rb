@@ -232,6 +232,20 @@ end
 # @param key [Array<Array<String>>] square matrix as key|ключ в виде квадратной матрицы
 # @return [String] encrypted string|зашифрованная строка
 def playfair_cipher(str, key)
+  upper_rus = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
+  lower_rus = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+  upper_eng = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  lower_eng = "abcdefghijklmnopqrstuvwxyz"
+  ch = ''
+  if upper_rus.include? key[0][0]
+    ch = 'Х'
+  elsif lower_rus.include? key[0][0]
+    ch = 'х'
+  elsif upper_eng.include? key[0][0]
+    ch = 'X'
+  elsif lower_eng.include? key[0][0]
+    ch = 'x'
+  end
   ind = 0
   encstr = ''
   str = str.delete(' ')
@@ -253,11 +267,11 @@ def playfair_cipher(str, key)
       end
     end
     if x2 == -2 && y2 == -2 && x1 != -2 && y1 != -2
-      str += 'X'
+      str += ch
       redo
     end
     if x1 == x2 && y1 == y2
-      str = "#{str[0..ind]}X#{str[ind + 1..]}"
+      str = "#{str[0..ind]}#{ch}#{str[ind + 1..]}"
       ind -= 2
     else
       encstr += if x1 != x2 && y1 != y2
@@ -290,6 +304,20 @@ end
 # @param key [Array<Array<String>>] square matrix as key|ключ в виде квадратной матрицы
 # @return [String] decrypted string|исходная строка
 def playfair_decipher(str, key)
+  upper_rus = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
+  lower_rus = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+  upper_eng = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  lower_eng = "abcdefghijklmnopqrstuvwxyz"
+  ch = ''
+  if upper_rus.include? key[0][0]
+    ch = 'Х'
+  elsif lower_rus.include? key[0][0]
+    ch = 'х'
+  elsif upper_eng.include? key[0][0]
+    ch = 'X'
+  elsif lower_eng.include? key[0][0]
+    ch = 'x'
+  end
   ind = 0
   encstr = ''
   str = str.delete(' ')
@@ -331,12 +359,12 @@ def playfair_decipher(str, key)
                end
     ind += 2
   end
-  if encstr[-1] == 'X'
+  if encstr[-1] == ch
     encstr = encstr[0..-2]
   end
   x = 0
   while x < encstr.size - 3
-    if encstr[x] == encstr[x+2] &&  encstr[x+1] == 'X'
+    if encstr[x] == encstr[x+2] &&  encstr[x+1] == ch
       encstr = encstr[0..x] + encstr[x + 2..-1]
     end
     x+=1

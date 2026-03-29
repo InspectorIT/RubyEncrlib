@@ -29,4 +29,12 @@ class ViginereCipherTest < Minitest::Test
   def test_viginere_encrypts_russian_text
     assert_equal 'ЪьжщпюКаы', viginere_cipher('ПриветМир', 'Ключ')
   end
+
+  def test_vigenere_with_single_letter_key
+    assert_equal 'Бвг Деёж', viginere_cipher('Абв Гдеё', 'Б')
+  end
+
+  def test_vigenere_key_longer_than_text
+    assert_equal 'Юзнпбц', viginere_cipher('Привет', 'ОченьДлинныйКлюч')
+  end
 end

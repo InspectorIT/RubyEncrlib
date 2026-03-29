@@ -30,4 +30,10 @@ class ViginereCipherTest < Minitest::Test
 
     assert_equal source, viginere_decipher(encrypted, key)
   end
+
+  def test_viginere_decrypts_russian_text
+    encrypted = 'Ртжв, яьнф!'
+
+    assert_equal 'Ёжик, беги!', viginere_decipher(encrypted, 'Ключ')
+  end
 end

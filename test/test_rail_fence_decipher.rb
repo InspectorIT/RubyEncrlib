@@ -8,7 +8,7 @@ class RailFenceDecipherTest < Minitest::Test
     assert_equal 'WEAREDISCOVEREDFLEEATONCE', rail_fence_decipher('WECRLTEERDSOEEFEAOCAIVDEN', 3)
   end
 
-  def test_rail_fence_round_trip_with_mixed_text
+  def test_rail_fence_round_trip_with_mixed_text1
     source = 'Привет, Ruby 2026!'
     encrypted = rail_fence_cipher(source, 4)
 
@@ -33,7 +33,7 @@ class RailFenceDecipherTest < Minitest::Test
     assert_equal 'Привет, Ruby 2026!', rail_fence_decipher(encrypted, 4)
   end
 
-  def test_rail_fence_round_trip_with_mixed_text
+  def test_rail_fence_round_trip_with_mixed_text2
     source = 'Secret + Секрет: 42!'
     encrypted = rail_fence_cipher(source, 4)
 

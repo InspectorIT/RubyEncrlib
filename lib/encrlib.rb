@@ -402,7 +402,6 @@ end
 # @param str [String] input string|исходная строка
 # @param key [Integer] rails count|количество рельс
 # @return [String] encrypted string|зашифрованная строка
-
 def rail_fence_cipher(str, key)
   return str if key <= 1 || str.size <= 1
 
@@ -425,7 +424,6 @@ end
 # @param str [String] encrypted string|зашифрованная строка
 # @param key [Integer] rails count|количество рельс
 # @return [String] decrypted string|исходная строка
-
 def rail_fence_decipher(str, key)
   return str if key <= 1 || str.size <= 1
 

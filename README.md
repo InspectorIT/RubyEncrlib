@@ -39,7 +39,7 @@ cd RubyEncrlib
 bundle install
 ```
 
-> The `Gemfile` specifies Ruby `4.0.1`. Use a matching Ruby version manager configuration.
+> В `Gemfile` указана версия Ruby `4.0.1`. Используйте соответствующую конфигурацию менеджера версий Ruby.
 
 ---
 

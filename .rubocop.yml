@@ -11,3 +11,21 @@ Metrics/MethodLength:
 
 Metrics/AbcSize:
   Enabled: false
+
+Layout/EndOfLine:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false

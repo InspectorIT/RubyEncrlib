@@ -113,12 +113,6 @@ decrypted = rail_fence_decipher(encrypted, 3)
 rake test
 ```
 
-или
-
-```bash
-for f in test/test_*.rb; do ruby -Itest "$f" || exit 1; done
-```
-
 ### Запуск RuboCop
 
 ```bash

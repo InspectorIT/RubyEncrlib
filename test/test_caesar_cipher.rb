@@ -1,13 +1,17 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require_relative '../lib/caesar'
 
 class CaesarCipherTest < Minitest::Test
   def test_caesar_encrypts_english_alphabet
-    assert_equal 'UVWXYZABCDEFGHIJKLMNOPQRSTuvwxyzabcdefghijklmnopqrst', caesar_cipher('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 20)
+    assert_equal 'UVWXYZABCDEFGHIJKLMNOPQRSTuvwxyzabcdefghijklmnopqrst',
+                 caesar_cipher('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 20)
   end
 
   def test_caesar_encrypts_russian_alphabet
-    assert_equal 'йклмнопрстуфхцчшщъыьэюяабвгдеёжзиЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯАБВГДЕЁЖЗИ', caesar_cipher('абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ', 10)
+    assert_equal 'йклмнопрстуфхцчшщъыьэюяабвгдеёжзиЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯАБВГДЕЁЖЗИ',
+                 caesar_cipher('абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ', 10)
   end
 
   def test_caesar_encrypts_digits

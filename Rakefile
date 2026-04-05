@@ -4,8 +4,8 @@ require 'rake/testtask'
 require 'rubocop/rake_task'
 
 Rake::TestTask.new(:test) do |t|
-    t.libs << 'lib'
-    t.pattern = 'test/**/test_*'
+  t.libs << 'lib'
+  t.pattern = 'test/**/test_*'
 end
 
 RuboCop::RakeTask.new(:rubocop)

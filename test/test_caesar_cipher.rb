@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../lib/encrlib'
+require_relative '../lib/caesar'
 
 class CaesarCipherTest < Minitest::Test
   def test_caesar_encrypts_english_alphabet
@@ -15,6 +15,6 @@ class CaesarCipherTest < Minitest::Test
   end
 
   def test_caesar_keeps_other_symbols
-    assert_equal '!@#$%^&*()/*-+.?|<>',viginere_cipher('!@#$%^&*()/*-+.?|<>', 121)
+    assert_equal '!@#$%^&*()/*-+.?|<>', caesar_cipher('!@#$%^&*()/*-+.?|<>', 121)
   end
 end

@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../lib/encrlib'
+require_relative '../lib/caesar'
 
 class CaesarCipherTest < Minitest::Test
   def test_caesar_encrypts_english_alphabet

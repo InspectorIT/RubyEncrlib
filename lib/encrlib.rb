@@ -1,32 +1,32 @@
 # frozen_string_literal: true
+# @param [String] x
+# @param [integer] key
+def caesar_symbch(x, key)
+  upper_rus = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
+  lower_rus = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+  if upper_rus.include?(x)
+    upper_rus[(upper_rus.index(x) + key) % 33]
+  elsif lower_rus.include?(x)
+    lower_rus[(lower_rus.index(x) + key) % 33]
+  elsif x.ord in 65..90
+    (((x.ord - 65 + key) % 26) + 65).chr(Encoding::UTF_8)
+  elsif x.ord in 97..122
+    (((x.ord - 97 + key) % 26) + 97).chr(Encoding::UTF_8)
+  elsif x.ord in 48..57
+    (((x.ord - 48 + key) % 10) + 48).chr(Encoding::UTF_8)
+  else
+    x
+  end
+end
+
 # string encryption with Caesar cipher|Шифрование строки методом Цезаря
 # @param str [String] input string|исходная строка
 # @param key [Integer] amount to move|сдвиг
 # @return [String] encrypted string|зашифрованная строка
 def caesar_cipher(str, key)
   encstr = ''
-  upper_rus = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
-  lower_rus = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
-
   str.chars.each do |x|
-    y = if upper_rus.include?(x)
-          idx = upper_rus.index(x)
-          new_idx = (idx + key) % 33
-          upper_rus[new_idx]
-        elsif lower_rus.include?(x)
-          idx = lower_rus.index(x)
-          new_idx = (idx + key) % 33
-          lower_rus[new_idx]
-        elsif x.ord in 65..90
-          (((x.ord - 65 + key) % 26) + 65).chr(Encoding::UTF_8)
-        elsif x.ord in 97..122
-          (((x.ord - 97 + key) % 26) + 97).chr(Encoding::UTF_8)
-        elsif x.ord in 48..57
-          (((x.ord - 48 + key) % 10) + 48).chr(Encoding::UTF_8)
-        else
-          x
-        end
-    encstr += y
+    encstr += caesar_symbch(x, key)
   end
   encstr
 end
@@ -36,33 +36,48 @@ end
 # @param key [Integer] amount to move|сдвиг
 # @return [String] decrypted string|исходная строка
 def caesar_decipher(str, key)
-  encstr = ''
-  upper_rus = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
-  lower_rus = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
-
-  str.chars.each do |x|
-    y = if upper_rus.include?(x)
-          idx = upper_rus.index(x)
-          new_idx = (idx - key) % 33
-          upper_rus[new_idx]
-        elsif lower_rus.include?(x)
-          idx = lower_rus.index(x)
-          new_idx = (idx - key) % 33
-          lower_rus[new_idx]
-        elsif x.ord in 65..90
-          (((x.ord - 65 - key) % 26) + 65).chr(Encoding::UTF_8)
-        elsif x.ord in 97..122
-          (((x.ord - 97 - key) % 26) + 97).chr(Encoding::UTF_8)
-        elsif x.ord in 48..57
-          (((x.ord - 48 - key) % 10) + 48).chr(Encoding::UTF_8)
-        else
-          x
-        end
-    encstr += y
-  end
-  encstr
+  caesar_cipher(str, -key)
 end
 
+def viginere_symbol_key_search(x, key)
+  upper_rus = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
+  lower_rus = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+  upper_eng = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  lower_eng = 'abcdefghijklmnopqrstuvwxyz'
+  if upper_rus.include?(key[x])
+    upper_rus.index(key[x])
+  elsif lower_rus.include?(key[x])
+    lower_rus.index(key[x])
+  elsif upper_eng.include?(key[x])
+    upper_eng.index(key[x])
+  elsif lower_eng.include?(key[x])
+    lower_eng.index(key[x])
+  else
+    0
+  end
+end
+def viginere_symbol_search(x, str, key)
+  upper_rus = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
+  lower_rus = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+  if upper_rus.include?(str[x])
+    upper_rus[(upper_rus.index(str[x]) + viginere_symbol_key_search(x, key)) % 33]
+  elsif lower_rus.include?(str[x])
+    lower_rus[(lower_rus.index(str[x]) + viginere_symbol_key_search(x, key)) % 33]
+  elsif str[x].ord in 65..90
+    (((str[x].ord - 65 + viginere_symbol_key_search(x, key)) % 26) + 65).chr(Encoding::UTF_8)
+  elsif str[x].ord in 97..122
+    (((str[x].ord - 97 + viginere_symbol_key_search(x, key)) % 26) + 97).chr(Encoding::UTF_8)
+  elsif str[x].ord in 48..57
+    idx_key = if key[x].ord in 48..57
+                key[x].ord - 48
+              else
+                0
+              end
+    (((str[x].ord - 48 + idx_key) % 10) + 48).chr(Encoding::UTF_8)
+  else
+    str[x]
+  end
+end
 # string encryption with Viginere cipher/Шифрование строки методом Виженера
 # @param str [String] input string|исходная строка
 # @param key [String] key word|ключевое слово
@@ -70,77 +85,8 @@ end
 def viginere_cipher(str, key)
   encstr = ''
   key += key while key.size < str.size
-
-  # Полные алфавиты (русский с Ё/ё, английский)
-  upper_rus = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
-  lower_rus = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
-  upper_eng = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  lower_eng = 'abcdefghijklmnopqrstuvwxyz'
-
-  (0..str.size - 1).each do |x|
-    y = if upper_rus.include?(str[x])
-          idx_key = if upper_rus.include?(key[x])
-                      upper_rus.index(key[x])
-                    elsif lower_rus.include?(key[x])
-                      lower_rus.index(key[x])
-                    elsif upper_eng.include?(key[x])
-                      upper_eng.index(key[x])
-                    elsif lower_eng.include?(key[x])
-                      lower_eng.index(key[x])
-                    else
-                      0
-                    end
-          upper_rus[(upper_rus.index(str[x]) + idx_key) % 33]
-        elsif lower_rus.include?(str[x])
-          idx_key = if lower_rus.include?(key[x])
-                      lower_rus.index(key[x])
-                    elsif upper_rus.include?(key[x])
-                      upper_rus.index(key[x])
-                    elsif lower_eng.include?(key[x])
-                      lower_eng.index(key[x])
-                    elsif upper_eng.include?(key[x])
-                      upper_eng.index(key[x])
-                    else
-                      0
-                    end
-          lower_rus[(lower_rus.index(str[x]) + idx_key) % 33]
-        elsif str[x].ord in 65..90
-          idx_key = if upper_eng.include?(key[x])
-                      upper_eng.index(key[x])
-                    elsif lower_eng.include?(key[x])
-                      lower_eng.index(key[x])
-                    elsif upper_rus.include?(key[x])
-                      upper_rus.index(key[x])
-                    elsif lower_rus.include?(key[x])
-                      lower_rus.index(key[x])
-                    else
-                      0
-                    end
-          ((str[x].ord - 65 + idx_key) % 26 + 65).chr(Encoding::UTF_8)
-        elsif str[x].ord in 97..122
-          idx_key = if lower_eng.include?(key[x])
-                      lower_eng.index(key[x])
-                    elsif upper_eng.include?(key[x])
-                      upper_eng.index(key[x])
-                    elsif lower_rus.include?(key[x])
-                      lower_rus.index(key[x])
-                    elsif upper_rus.include?(key[x])
-                      upper_rus.index(key[x])
-                    else
-                      0
-                    end
-          ((str[x].ord - 97 + idx_key) % 26 + 97).chr(Encoding::UTF_8)
-        elsif str[x].ord in 48..57
-          idx_key = if key[x].ord in 48..57
-                      key[x].ord - 48
-                    else
-                      0
-                    end
-
-          ((str[x].ord - 48 + idx_key) % 10 + 48).chr(Encoding::UTF_8)
-        else
-          str[x]
-        end
+  (0..(str.size - 1)).each do |x|
+    y = viginere_symbol_search(x, str, key)
     encstr += y
   end
   encstr
@@ -153,72 +99,24 @@ end
 def viginere_decipher(str, key)
   decstr = ''
   key += key while key.size < str.size
-
   upper_rus = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
   lower_rus = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
-  upper_eng = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  lower_eng = "abcdefghijklmnopqrstuvwxyz"
-
-  (0..str.size - 1).each do |x|
+  (0..(str.size - 1)).each do |x|
     y = if upper_rus.include?(str[x])
-          idx_key = if upper_rus.include?(key[x])
-                      upper_rus.index(key[x])
-                    elsif lower_rus.include?(key[x])
-                      lower_rus.index(key[x])
-                    elsif upper_eng.include?(key[x])
-                      upper_eng.index(key[x])
-                    elsif lower_eng.include?(key[x])
-                      lower_eng.index(key[x])
-                    else
-                      0
-                    end
-          upper_rus[(upper_rus.index(str[x]) - idx_key) % 33]
+          upper_rus[(upper_rus.index(str[x]) - viginere_symbol_key_search(x, key)) % 33]
         elsif lower_rus.include?(str[x])
-          idx_key = if lower_rus.include?(key[x])
-                      lower_rus.index(key[x])
-                    elsif upper_rus.include?(key[x])
-                      upper_rus.index(key[x])
-                    elsif lower_eng.include?(key[x])
-                      lower_eng.index(key[x])
-                    elsif upper_eng.include?(key[x])
-                      upper_eng.index(key[x])
-                    else
-                      0
-                    end
-          lower_rus[(lower_rus.index(str[x]) - idx_key) % 33]
+          lower_rus[(lower_rus.index(str[x]) - viginere_symbol_key_search(x, key)) % 33]
         elsif str[x].ord in 65..90
-          idx_key = if upper_eng.include?(key[x])
-                      upper_eng.index(key[x])
-                    elsif lower_eng.include?(key[x])
-                      lower_eng.index(key[x])
-                    elsif upper_rus.include?(key[x])
-                      upper_rus.index(key[x])
-                    elsif lower_rus.include?(key[x])
-                      lower_rus.index(key[x])
-                    else
-                      0
-                    end
-          ((str[x].ord - 65 - idx_key) % 26 + 65).chr(Encoding::UTF_8)
+          (((str[x].ord - 65 - viginere_symbol_key_search(x, key)) % 26) + 65).chr(Encoding::UTF_8)
         elsif str[x].ord in 97..122
-          idx_key = if lower_eng.include?(key[x])
-                      lower_eng.index(key[x])
-                    elsif upper_eng.include?(key[x])
-                      upper_eng.index(key[x])
-                    elsif lower_rus.include?(key[x])
-                      lower_rus.index(key[x])
-                    elsif upper_rus.include?(key[x])
-                      upper_rus.index(key[x])
-                    else
-                      0
-                    end
-          ((str[x].ord - 97 - idx_key) % 26 + 97).chr(Encoding::UTF_8)
+          (((str[x].ord - 97 - viginere_symbol_key_search(x, key)) % 26) + 97).chr(Encoding::UTF_8)
         elsif str[x].ord in 48..57
           idx_key = if key[x].ord in 48..57
                       key[x].ord - 48
                     else
                       0
                     end
-          ((str[x].ord - 48 - idx_key) % 10 + 48).chr(Encoding::UTF_8)
+          (((str[x].ord - 48 - idx_key) % 10) + 48).chr(Encoding::UTF_8)
         else
           str[x]
         end
@@ -254,8 +152,8 @@ def playfair_cipher(str, key)
     y1 = -2
     x2 = -2
     y2 = -2
-    (0..key.size - 1).each do |i|
-      (0..key.size - 1).each do |j|
+    (0..(key.size - 1)).each do |i|
+      (0..(key.size - 1)).each do |j|
         if str[ind] == key[i][j]
           x1 = i
           y1 = j
@@ -271,7 +169,7 @@ def playfair_cipher(str, key)
       redo
     end
     if x1 == x2 && y1 == y2
-      str = "#{str[0..ind]}#{ch}#{str[ind + 1..]}"
+      str = "#{str[0..ind]}#{ch}#{str[(ind + 1)..]}"
       ind -= 2
     else
       encstr += if x1 != x2 && y1 != y2
@@ -326,8 +224,8 @@ def playfair_decipher(str, key)
     y1 = key.size + 1
     x2 = key.size + 1
     y2 = key.size + 1
-    (0..key.size - 1).each do |i|
-      (0..key.size - 1).each do |j|
+    (0..(key.size - 1)).each do |i|
+      (0..(key.size - 1)).each do |j|
         if str[ind] == key[i][j]
           x1 = i
           y1 = j
@@ -365,7 +263,7 @@ def playfair_decipher(str, key)
   x = 0
   while x < encstr.size - 3
     if encstr[x] == encstr[x+2] &&  encstr[x+1] == ch
-      encstr = encstr[0..x] + encstr[x + 2..-1]
+      encstr = encstr[0..x] + encstr[(x + 2)..-1]
     end
     x+=1
   end

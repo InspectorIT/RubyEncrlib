@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # @param [String] sym
 # @param [integer] key
 def caesar_symbch(sym, key)

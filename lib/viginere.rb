@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def viginere_symbol_key_search(sym, key)
   upper_rus = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
   lower_rus = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require_relative '../lib/caesar'
+require_relative '../lib/encrlib/caesar'
 
 class CaesarCipherTest < Minitest::Test
   def test_caesar_encrypts_english_alphabet

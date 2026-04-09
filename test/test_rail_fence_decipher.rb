@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require_relative '../lib/rail_fence'
+require_relative '../lib/encrlib/rail_fence'
 
 class RailFenceDecipherTest < Minitest::Test
   def test_rail_fence_decrypts_classic_example

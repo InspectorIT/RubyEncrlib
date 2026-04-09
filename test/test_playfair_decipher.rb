@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require_relative '../lib/playfair'
+require_relative '../lib/encrlib/playfair'
 
 class PlayfairCipherTest < Minitest::Test
   LETTER_MATRIX_ENGLISH_UPPER = [

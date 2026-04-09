@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../lib/encrlib'
+require_relative '../lib/encrlib/atbash'
 
 class AtbashCipherTest < Minitest::Test
   def test_atbash_encrypts_english_text_upper

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require_relative '../lib/viginere'
+require_relative '../lib/encrlib/viginere'
 
 class ViginereCipherTest < Minitest::Test
   def test_viginere_round_trip_for_english_text

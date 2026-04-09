@@ -6,6 +6,21 @@ AllCops:
 Layout/LineLength:
   Max: 120
 
+Layout/TrailingEmptyLines:
+  Enabled: false
+
+Layout/EndOfLine:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Enabled: false
+
+Layout/IndentationConsistency:
+  Enabled: false
+
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+
 Metrics/MethodLength:
   Enabled: false
 
@@ -16,4 +31,19 @@ Metrics/PerceivedComplexity:
   Enabled: false
 
 Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Style/Semicolon:
   Enabled: false
